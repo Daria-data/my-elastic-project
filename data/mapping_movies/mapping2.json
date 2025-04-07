@@ -1,0 +1,51 @@
+{
+    "mappings": {
+        "properties": {
+            "actors": {
+                "type": "keyword"
+            },
+            "directors": {
+                "type": "keyword"
+            },
+            "genres": {
+                "type": "keyword"
+            },
+            "image_url": {
+                "type": "keyword"
+            },
+            "plot": {
+                "type": "text"
+            },
+            "rank": {
+                "type": "long"
+            },
+            "rating": {
+                "type": "float"
+            },
+            "release_date": {
+                "type": "date"
+            },
+            "running_time_secs": {
+                "type": "long"
+            },
+            "title": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "year": {
+                "type": "long"
+            },
+            "id": {
+                "type": "keyword"
+            },
+            "type": {
+                "type": "keyword"
+            }
+        }
+    }
+}
