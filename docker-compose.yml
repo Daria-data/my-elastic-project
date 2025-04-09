@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_elasticsearch
-    container_name: elasticsearch
+    container_name: elasticsearch_stream
     environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_kibana
-    container_name: kibana
+    container_name: kibana-stream
     depends_on:
       - elasticsearch
     ports:
@@ -28,7 +28,7 @@ services:
     build:   
       context: .
       dockerfile: Dockerfile_logstash
-    container_name: logstash
+    container_name: logstash_stream
     depends_on:
       - elasticsearch
     ports:
