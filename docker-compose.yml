@@ -35,7 +35,24 @@ services:
       - "5044:5044"
       - "9600:9600"
     volumes:
-      - ./data:/usr/share/logstash/data  
+      - ./data:/usr/share/logstash/data
+
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:7.17.0
+    container_name: metricbeat_stream
+    user: root
+    volumes:
+      - ./config/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /proc:/hostfs/proc:ro
+      - /:/hostfs:ro
+  
+    depends_on:
+      - elasticsearch
+      - logstash
+      - kibana
+    command: ["/bin/sh", "-c", "chmod go-w /usr/share/metricbeat/metricbeat.yml && metricbeat -e -c /usr/share/metricbeat/metricbeat.yml"]
 
 volumes:
   elastic_data:
